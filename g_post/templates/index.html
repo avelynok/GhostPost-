@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="center">
+        <button class="button"><a href={% url 'add_post' %}>SHARE YOUR IDEA</a></button>
+        <button class="button"><a href={% url "high_to_low" %}>High To Low</a></button>
+        <button class="button"><a href={% url "low_to_high" %}>Low To High</a></button>
+        <button class="button"><a href={% url 'boast' %}>BOAST</a></button>
+        <button class="button"><a href={% url 'roast' %}>ROAST</a></button>
+    </div>
+    
+  {% for idea in data %}
+        <div class="post">
+        <p>
+        {{ idea.post }}
+         <button class="button"><a href="upVote/{{idea.id}}/">UpVote</a></button>
+        <button class="button"><a href="downVote/{{idea.id}}/">DownVote</a></button>
+        {{ idea.upVote }} upvote(s) 
+        </p>
+        </div>
+    {% endfor %}
+    
+{% endblock %}
