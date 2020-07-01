@@ -12,8 +12,9 @@ DateTimeField for submission time
 class Post(models.Model):
     post_type = models.BooleanField(default=False)
     post = models.CharField(max_length=280)
-    upVote = models.IntegerField()
-    downVote = models.IntegerField()
+    upVote = models.IntegerField(default=0)
+    downVote = models.IntegerField(default=0)
+    totalVote = models.IntegerField(default=0)
     date = models.DateTimeField(default=timezone.now)
     
 

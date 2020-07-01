@@ -26,31 +26,33 @@ def add_post(request):
 def upVote(request, post_id):
     post = Post.objects.get(id=post_id)
     post.upVote += 1
+    post.totalVote +=1
     post.save()
     return HttpResponseRedirect(reverse('homepage'))
 
 def downVote(request, post_id):
     post = Post.objects.get(id=post_id)
-    post.upVote -= 1
+    post.downVote += 1
+    post.totalVote -=1
     post.save()
     return HttpResponseRedirect(reverse('homepage'))
 
 def high_to_low(request):
     data = Post.objects.order_by('-upVote')
-    return render(request, 'index.html', {'data': data})
+    return render(request, 'filters.html', {'data': data})
 
 
 def low_to_high(request):
     data = Post.objects.order_by('upVote')
-    return render(request, 'index.html', {'data': data})
+    return render(request, 'filters.html', {'data': data})
 
 def roast(request):
     data= Post.objects.filter(post_type=False).order_by('-date')
-    return render(request, 'index.html', {'data':data})
+    return render(request, 'filters.html', {'data':data})
 
 def boast(request):
     data = Post.objects.filter(post_type=True).order_by('-date')
-    return render(request, 'index.html', {'data':data})
+    return render(request, 'filters.html', {'data':data})
 
 
 
